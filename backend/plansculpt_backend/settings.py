@@ -29,7 +29,7 @@ import os
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 
-ALLOWED_HOSTS = ['*'] # We can leave this as * for now to make it easy, or add '.pythonanywhere.com'
+ALLOWED_HOSTS = ['*'] # Allows all for testing, but specifically: ['blee100003.pythonanywhere.com']
 
 
 
@@ -153,7 +153,18 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
-CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_ALL_ORIGINS = True # Good for testing
+
+# Essential for Django 4+ and external frontends (Vercel)
+CSRF_TRUSTED_ORIGINS = [
+    'https://plansculpt.vercel.app',
+    'https://blee100003.pythonanywhere.com',
+]
+
+# Explicit CORS allows (safer than ALLOW_ALL, optional but good)
+CORS_ALLOWED_ORIGINS = [
+    "https://plansculpt.vercel.app",
+]
 
 LOGGING = {
     'version': 1,
